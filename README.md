@@ -91,9 +91,9 @@ crontab -e
 
 * 12 * * * python3 /home/pi/Software/Apps/dawn-dusk.py # adds cronjob to run command at dusk
 
-# job added by dawn-dusk.py (variable time of execution determined by sunset time)
+#job added by dawn-dusk.py (variable time of execution determined by sunset time)
 
-# turn off fairy lights
+#turn off fairy lights
 
 * 21 * * * python /home/pi/Software/Apps/tx.py "fairy lights off" # fairy_lights_off
 
