@@ -7,15 +7,20 @@ It’s already installed in full fat Raspbian.
 
 If running Raspbian Lite run 
 
-sudo apt install pigpio python-pigpio python3-pigpio
+  sudo apt install pigpio python-pigpio python3-pigpio
 
 Followed by:
 
-sudo apt install git
-git clone https://github.com/joan2937/pigpio
+  sudo apt install git
+  
+  git clone https://github.com/joan2937/pigpio
+
 Check what python versions are available (and the default):
-ls /usr/bin/python*
-python --version
+
+  ls /usr/bin/python*
+
+  python --version
+ 
 Edit ~/.bashrc to add the python PATH locations and to change the default python version to 3.5 (or whichever the latest version is as displayed above)t:
 export PATH=${PATH}:/home/pi:/home/pi/Software:/home/pi/Software/Apps
 alias python=’/usr/bin/python3.5’
