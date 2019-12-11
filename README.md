@@ -74,7 +74,7 @@ _433.py
 
 places the Pi into 433 rx mode, waiting for demodulated FR remote control code on GPIO pin 38.
 
-With the 433MHz receiver connected as below, when a 433MHz remote control is used nearby, something like the following data will be produced:
+With the 433MHz receiver switched on, when a 433MHz remote control is used nearby, something like the following data will be produced:
 
 code=5330005 bits=24 (gap=12780 t0=422 t1=1236)
 
