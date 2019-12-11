@@ -1,11 +1,16 @@
 # RFcontrol
 Control of remote mains sockets via 433MHz
+
 Install PiGPIO as follows:
 
 It’s already installed in full fat Raspbian.
+
 If running Raspbian Lite run 
+
 sudo apt install pigpio python-pigpio python3-pigpio
+
 Followed by:
+
 sudo apt install git
 git clone https://github.com/joan2937/pigpio
 Check what python versions are available (and the default):
