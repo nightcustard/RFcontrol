@@ -1,6 +1,6 @@
 # coding=utf-8
 #!/usr/bin/python3
-# dawn-duskRFR.py (Radio Frequency Remotes)
+# dawn-dusk.py
 # code from https://www.raspberrypi.org/forums/viewtopic.php?t=114745
 # Determines time of sunrise & sunset for given lat/long and adds line to user crontab to switch on lights
 # at dusk
@@ -9,9 +9,9 @@ import ephem
 import datetime
 
 home = ephem.Observer() # See: https://rhodesmill.org/pyephem/quick.html
-home.lat = '53.451188' # Culcheth latitude from Google maps
-home.lon = '-2.527018' # Culcheth longitude from Google maps
-home.elevation = 36  # Langcliffe Close altitude from https://www.daftlogic.com/sandbox-google-maps-find-altitude.htm#
+home.lat = 'XX.XXXXXX' # Your latitude from Google maps (eg) 52.123456
+home.lon = 'X.XXXXXX' # Your longitude from Google maps (eg) -2.123456
+home.elevation = 36  # Your altitude from https://www.daftlogic.com/sandbox-google-maps-find-altitude.htm#
 print ('Current date and UTC time is ',home.date)
 
 sun = ephem.Sun()
@@ -115,17 +115,4 @@ job = cron.new(command='python3 /home/pi/Software/Apps/tx.py "fairy lights off" 
 job.hour.on(FLoffhr)
 job.minute.on(FLoffmin)
 
-#Xmas white tree lights 
-#These lights switch off automatically every 4 or 5 hours - need to recycle power to turn lights back on. 'Xmas white tree lights on' is a special routine in tx.py which first turns off
-#the white lights then a few seconds later turns them back on.
-#The white lights are switched on at 06:45 (see above), this loop defines a power recycle every successive 4 hours. Switch off at 22:00 is defined above.
-h = treeonhr
-m = treeonmin
-
-while (h<18):
-	h=h+4
-	job = cron.new(command='python3 /home/pi/Software/Apps/tx.py "Xmas white tree lights on"', comment='xmas_white_tree_lights_on') # cycles power to white lights (off then on)
-	job.hour.on(h)
-	job.minute.on(m)
-	
 cron.write()  #writes new user crontab
