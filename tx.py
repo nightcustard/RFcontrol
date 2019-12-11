@@ -2,8 +2,8 @@
 # coding=utf-8
 
 # tx.py
-# Uses pigpio library and python programme _433.py to transmit remote control signals to Wilco remote mains sockets,
-# Can be used as tx.py, in which case the menu is presented, or tx.py "command" which will execute the text command directly (for future integration with Google Home(?))
+# Uses pigpio library and python programme _433.py to transmit remote control signals to remote mains sockets.
+# Can be used as tx.py, in which case the menu is presented, or tx.py "command" which will execute the text command directly.
 
 import sys
 import time
@@ -12,7 +12,6 @@ import _433
 import datetime
 import os
 import subprocess
-#from collections import deque # See https://www.pythoncentral.io/use-queue-beginners-guide/
 
 TX=21  #GPIO pin 40
 pi = pigpio.pi()
@@ -39,21 +38,11 @@ def tx():    # _433.tx sends the appropriate remote control codes to the 433MHz 
 	tx=_433.tx(pi, gpio=TX, gap=remote[i+2], t0=remote[i+3], t1=remote[i+4])
 	for p in range (5):		# send code five times
 		tx.send(remote[i])
-#		time.sleep(1)
 	tx.cancel()
 
 def help():
 	print("\nUsage: tx.py (to get menu) or tx.py 'command' - note the use of '', where valid commands are:")
 	print("\n'fairy lights on',\n'fairy lights off',\n'porch fairy lights on',\n'porch fairy lights off',\n'porch lights on',\n'porch lights off',\n'Amp on',\n'Amp off',\n'front room lamp on',\n'front room lamp off',\n'stairs fairy lights on',\n'stairs fairy lights off',\n'Ikea kitchen lights on',\n'Ikea kitchen lights off',\n'Xmas lights on',\n'Xmas lights off'\n'Xmas tree lights on',\n'Xmas tree lights off',\n") # add to list as appropriate   
-
-# special function which cycles power to the white xmas lights (first turns them off, then back on)  NO LONGER USED
-def cycle():
-	i = 45 # Xmas white tree lights off (this remote now used by Ikea kitchen lights)
-	tx()
-	time.sleep(t)
-	i = 40 # Xmas white tree lights on
-	tx()
-
 
 # This section looks for one or more command line arguments and executes each in turn, thus permitting multiple commands to be executed at the same time
 
@@ -61,7 +50,6 @@ if len(sys.argv) >= 2: # Check for one or more command line arguments, if none g
 	n = len(sys.argv)-1 # n = number of command line arguments
 	for x in range(n): # x runs from 0 to n-1
 		G = sys.argv[x+1] #[0] is /home/pi/Software/Apps/tx.py; [1] is (eg) fairy lights on; [2] is second command line argument etc.
-		#print (G)
 		try:                         # allows errors to be handled
 			index = command.index(G) # return the index of the text in the command tuple, if it isn't there, then:
 		except ValueError:           # a ValueError is returned if the input isn't in the command tuple
@@ -70,12 +58,7 @@ if len(sys.argv) >= 2: # Check for one or more command line arguments, if none g
 			exit()
 
 		i = command[index+1]  # i is the start index position of the five remote control codes in the 'remote' tuple
-		#print('\033[1;32;40mTurning', G, '\n')
-#		print('Turning', G, '\n')
-		if i == 999: # Xmas white tree lights on [999 to disable - was 40]
-				cycle() # turn the white lights off, wait t seconds and turn them on
-		else:
-			tx()
+		tx()
 	exit()	
 		
 # This is the text prompt menu section if no command line arguments were entered
@@ -137,21 +120,21 @@ exit()
 #format is: \033[  Escape code; 1 = Style; 31 = Text colour (red); 40m = Background colour (black)
 #TEXT COLOR	TEXT STYLE		BACKGROUND COLOR
 #Black	30	No effect	0	Black	40
-#Red	31	Bold		1	Red		41
+#Red	31	Bold		1	Red	41
 #Green	32	Underline	2	Green	42
 #Yellow	33	Negative1	3	Yellow	43
 #Blue	34	Negative2	5	Blue	44
-#Purple	35					Purple	45
-#Cyan	36					Cyan	46
-#White	37					White	47
+#Purple	35				Purple	45
+#Cyan	36				Cyan	46
+#White	37				White	47
 
 #	Remote control allocation
-#fairy lights (+ mirror lights)on/off:		WIII-1
-#porch fairy lights on/off:					WIII-2
-#porch lights on/off:						WIII-3
-#Kitchen Amp on/off:						AEI-2
-#front room lamp on/off:					WIII-4
+#fairy lights (+ mirror lights)on/off:			WIII-1
+#porch fairy lights on/off:				WIII-2
+#porch lights on/off:					WIII-3
+#Kitchen Amp on/off:					AEI-2
+#front room lamp on/off:				WIII-4
 #Ikea kitchen lights on/off:				WII-1
 #Xmas & front door lights on/off:			WII-2
-#Xmas tree lights on/off:					WII-3
+#Xmas tree lights on/off:				WII-3
 #Stairs fairy lights on/off:				WII-4
