@@ -2,9 +2,10 @@
 Control of remote mains sockets via 433MHz
 
 Brief description of user code:
+
 tx.py - a programme to select and send the correct transmission parameters for a particular remote controlled socket.  The various designations, such as 'porch lights on' are my remote socket uses and of course should be changed to suit your particular application.
 
-dawn-dusk.py - a programme to calculate the dawn and dusk times at your location and use them to populate the user crontab with remote on/off commands at the appropriate times. 
+dawn-dusk.py - a programme to calculate the dawn and dusk times at your location and use them to populate the user crontab with remote on/off commands at the appropriate times. This programme should itself be run every day via the user crontab to ensure dawn and dusk times are recalculated.
 
 General setup instructions (assumes Raspbian installed with ssh enabled):
 
