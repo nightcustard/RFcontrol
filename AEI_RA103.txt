@@ -1,0 +1,6 @@
+1on: code=5522517 bits=24 (gap=10970 t0=353 t1=1064)
+1off: code=1328212 bits=24 (gap=10966 t0=365 t1=1052)
+2on: code=5526613 bits=24 (gap=10960 t0=358 t1=1062)
+2off: code=1332308 bits=24 (gap=10970 t0=360 t1=1058)
+3on: code=5521749 bits=24 (gap=10985 t0=353 t1=1065)
+3off: code=1327444 bits=24 (gap=10980 t0=358 t1=1060)
