@@ -95,6 +95,6 @@ crontab -e
 
 #turn off fairy lights
 
-* 21 * * * python /home/pi/Software/Apps/tx.py "fairy lights off" # fairy_lights_off
+/* 21 * * * python /home/pi/Software/Apps/tx.py "fairy lights off" # fairy_lights_off
 
 41 18 * * * python /home/pi/Software/Apps/tx.py "fairy lights on" # fairy_lights_on
